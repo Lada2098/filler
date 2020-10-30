@@ -22,7 +22,7 @@ int			is_best_move(int *pos, int oldx, int oldy, int *dir)
 	return ((new > old));
 }
 
-int			*max_distance(t_state *game, int i, int j)
+int			*max_distance(t_filler *game, int i, int j)
 {
 	int	*ret;
 	int x;
@@ -55,7 +55,7 @@ static void	init_params(int *count, int *x, int *y)
 	*y = 0;
 }
 
-int			*get_best_direction(t_state *game, int avg_x, int avg_y)
+int			*get_best_direction(t_filler *game, int avg_x, int avg_y)
 {
 	int	count;
 	int x;
@@ -83,7 +83,7 @@ int			*get_best_direction(t_state *game, int avg_x, int avg_y)
 	return (max_distance(game, avg_x, avg_y));
 }
 
-void		make_move(t_state *game, t_list *moves)
+void		make_move(t_filler *game, t_list *moves)
 {
 	t_list	*head;
 	int		x;

@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include "ft_printf.h"
 
-typedef struct		s_state
+typedef struct		s_filler
 {
 	char			**map;
 	char			**piece;
@@ -24,41 +24,25 @@ typedef struct		s_state
 	char			opponent;
 	int				x;
 	int				y;
-}					t_state;
-
-/*
-**	Main functions
-*/
+}					t_filler;
 
 int					main(void);
-int					play(t_state *game);
+int					play(t_filler *game);
 
-/*
-**	Initializers
-*/
+void				assign_players(t_filler *game);
+void				get_map_size(t_filler *game);
+void				get_map(t_filler *game);
+void				get_piece(t_filler *game);
+void				initialize_turn(t_filler *game);
 
-void				assign_players(t_state *game);
-void				get_map_size(t_state *game);
-void				get_map(t_state *game);
-void				get_piece(t_state *game);
-void				initialize_turn(t_state *game);
-
-/*
-**	Checkers
-*/
-
-int					check(t_state *game, int x, int y, int *placed);
-int					place_piece(t_state *game, int top_x, int top_y);
-int					*is_valid_move(t_state *game, int i, int j);
-t_list				*get_legal_moves(t_state *game);
-
-/*
-**	Movers
-*/
+int					check(t_filler *game, int x, int y, int *placed);
+int					place_piece(t_filler *game, int top_x, int top_y);
+int					*is_valid_move(t_filler *game, int i, int j);
+t_list				*get_legal_moves(t_filler *game);
 
 int					is_best_move(int *pos, int oldx, int oldy, int *dir);
-int					*max_distance(t_state *game, int i, int j);
-int					*get_best_direction(t_state *game, int avg_x, int avg_y);
-void				make_move(t_state *game, t_list *moves);
+int					*max_distance(t_filler *game, int i, int j);
+int					*get_best_direction(t_filler *game, int avg_x, int avg_y);
+void				make_move(t_filler *game, t_list *moves);
 
 #endif

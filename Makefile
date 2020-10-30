@@ -5,44 +5,55 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 # directories
-SRC_DIR = sources/
-INC_DIR = includes/
+SRC_DIR = ./sources
+INC_DIR = ./includes
+OBJ_DIR = ./obj
+
+PRINTF_INC_DIR = ./ft_printf/includes/
+LIBFT_INC_DIR = ./ft_printf/libft/includes/
 
 # files
 # SRC_FILES = ft_printf.c
 SRC_FILES = $(notdir $(wildcard $(SRC_DIR)*.c))
 OBJ_FILES = $(SRC_FILES:%.c=%.o)
-PRINTF = ft_printf/libftprintf.a
+PRINTF = ./ft_printf/libftprintf.a
 
-# full path
-SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
-OBJ = $(addprefix obj/, $(OBJ_FILES))
-INCLUDES =	-I ft_printf/includes/ -I ft_printf/libft/includes \
-			-I includes/
+SRC				=	check.c \
+					initializers.c \
+					main.c \
+					make_move.c
+SRCS			=	$(addprefix $(SRC_DIR)/, $(SRC))
+OBJ				=	$(SRC:.c=.o)
+OBJS			=	$(addprefix $(OBJ_DIR)/, $(OBJ))
+
+INCS = $(INC_DIR)/filler.h
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@$(MAKE) -C ft_printf/
-	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(PRINTF)
-	@cp $(NAME) players/
+$(NAME): $(PRINTF) $(INCS) $(OBJ_DIR) $(OBJS)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(PRINTF)
+	cp $(NAME) players/
 	@echo "[INFO] Player gekans created."
 
-$(OBJ): $(SRC)
-	@mkdir -p obj/
-	@$(CC) $(FLAGS) $(INCLUDES) -c $^
-	@mv -f *.o obj/
+$(PRINTF):
+	$(MAKE) -C ft_printf/
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c
+	$(CC) $(FLAGS) -I $(INC_DIR) -I $(PRINTF_INC_DIR) -I $(LIBFT_INC_DIR) -o $@ -c $<
 
 clean:
-	@$(MAKE) -C ft_printf/ clean
-	@rm -rf obj
+	$(MAKE) -C ft_printf/ clean
+	rm -rf $(OBJ_DIR)
 	@echo "[INFO] Objects removed."
 
 fclean: clean
-	@$(MAKE) -C ft_printf/ fclean
-	@rm $(NAME)
+	$(MAKE) -C ft_printf/ fclean
+	rm -f $(NAME)
 	@echo "[INFO] Player gekans removed"
 
 re: fclean all
 
-.PHONY: all $(NAME) clean fclean re
+.PHONY: all clean fclean re

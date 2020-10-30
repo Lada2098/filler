@@ -12,7 +12,7 @@
 
 #include "filler.h"
 
-int		check(t_state *game, int x, int y, int *placed)
+int		check(t_filler *game, int x, int y, int *placed)
 {
 	if (x < 0 || y < 0 || x >= game->x || y >= game->y)
 		return (0);
@@ -28,7 +28,7 @@ int		check(t_state *game, int x, int y, int *placed)
 	return (1);
 }
 
-int		place_piece(t_state *game, int top_x, int top_y)
+int		place_piece(t_filler *game, int top_x, int top_y)
 {
 	int		placed;
 	int		x;
@@ -54,7 +54,7 @@ int		place_piece(t_state *game, int top_x, int top_y)
 	return (1);
 }
 
-int		*is_valid_move(t_state *game, int i, int j)
+int		*is_valid_move(t_filler *game, int i, int j)
 {
 	int	*ret;
 	int x;
@@ -81,7 +81,7 @@ int		*is_valid_move(t_state *game, int i, int j)
 	return (NULL);
 }
 
-t_list	*get_legal_moves(t_state *game)
+t_list	*get_legal_moves(t_filler *game)
 {
 	t_list	*moves;
 	int		x;

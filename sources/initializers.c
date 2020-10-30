@@ -12,7 +12,7 @@
 
 #include "filler.h"
 
-void	assign_players(t_state *game)
+void	assign_players(t_filler *game)
 {
 	char	*line;
 	int		i;
@@ -35,7 +35,7 @@ void	assign_players(t_state *game)
 	free(line);
 }
 
-void	get_map_size(t_state *game)
+void	get_map_size(t_filler *game)
 {
 	char	*line;
 	int		i;
@@ -52,7 +52,7 @@ void	get_map_size(t_state *game)
 	free(line);
 }
 
-void	get_map(t_state *game)
+void	get_map(t_filler *game)
 {
 	char	*line;
 	int		i;
@@ -72,7 +72,7 @@ void	get_map(t_state *game)
 	game->map[i] = NULL;
 }
 
-void	get_piece(t_state *game)
+void	get_piece(t_filler *game)
 {
 	char	*line;
 	int		i;
@@ -99,7 +99,7 @@ void	get_piece(t_state *game)
 	game->piece[i] = NULL;
 }
 
-void	initialize_turn(t_state *game)
+void	initialize_turn(t_filler *game)
 {
 	get_map_size(game);
 	get_map(game);

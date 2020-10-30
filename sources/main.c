@@ -28,7 +28,7 @@ void	free_array(char ***src)
 	*src = NULL;
 }
 
-int		play(t_state *game)
+int		play(t_filler *game)
 {
 	t_list	*moves;
 
@@ -47,9 +47,9 @@ int		play(t_state *game)
 
 int		main(void)
 {
-	t_state	*game;
+	t_filler	*game;
 
-	game = malloc(sizeof(t_state));
+	game = malloc(sizeof(t_filler));
 	assign_players(game);
 	while (play(game))
 		continue ;
