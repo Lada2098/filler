@@ -32,7 +32,6 @@ all: $(NAME)
 
 $(NAME): $(PRINTF) $(INCS) $(OBJ_DIR) $(OBJS)
 	$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(PRINTF)
-	cp $(NAME) players/
 	@echo "[INFO] Player gekans created."
 
 $(PRINTF):
